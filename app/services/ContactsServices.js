@@ -6,13 +6,15 @@ angular.module('ContactServices', ['firebase'])
 	var _firebasearr = $firebaseArray(_ref);
 
 	var funciones = {
+		setScope: function(){
+			return _firebasearr;
+		},
 		add: function(contact){
-			_firebasearr.$add({
-				name:"GGGGGGGGG"
-			}).then(function (ref){
+			var promise = _firebasearr.$add(contact).then(function (ref){
 				var id = ref.key();
-				console.log("G: " + id);
-			})
+				console.log("GGGGGG: " + id);
+			});
+			return promise;
 		}
 	}
 	return funciones;

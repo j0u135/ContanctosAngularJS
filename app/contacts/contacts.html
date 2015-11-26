@@ -1,27 +1,172 @@
 <div class="row">
 	<div class="large-10 columns">
-		<h4>Your contacts(X)</h4>
-		<table>
-			<thead>
-				<th width="20%">Nombre</th>
-				<th width="20%">Compañía</th>
-				<th width="20%">email</th>
-				<th width="20%">Acciones</th>
-			</thead>
-			<tbody>
-				<tr>
-					<td><a href="#">Julio Sánchez</a></td>
-					<td>Super Software</td>
-					<td>julio@supersoftware.com</td>
-					<td>
-						<a href="#" class="button tiny">Editar</a>
-						<a href="#" class="button tiny alert">Borrar</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<div ng-show="vista_seleccionada=='lista'">
+			<h4>Tus contactos ({{contacts.length}})</h4>
+			<table>
+				<thead>
+					<th width="20%">Nombre</th>
+					<th width="20%">Compañía</th>
+					<th width="20%">email</th>
+					<th width="20%">Acciones</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="contact in contacts">
+						<td><a href="">{{contact.name}}</a></td>
+						<td>{{contact.work}}</td>
+						<td>{{contact.email}}</td>
+						<td>
+							<a ng-click="setEditContact(contact)" class="button tiny">Editar</a>
+							<a href="" class="button tiny alert">Borrar</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div ng-show="vista_seleccionada=='nuevo'">
+			<form ng-submit="addContact()">
+				<h4>Añadir Contacto</h4>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Nombre
+							<input type="text" placeholder="Nombre del contacto." ng-model="name" />
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>email:
+							<input type="text" placeholder="email del contacto" ng-model="email"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Compañía:
+							<input type="text" placeholder="Compañía en la que trabaja" ng-model="work" />
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Tel Empresa:
+							<input type="text" placeholder="Teléfono de la empresa" ng-model="tels.work"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Tel Celular:
+							<input type="text" placeholder="Número telefónico celular" ng-model="tels.cel"/>
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Tel Casa:
+							<input type="text" placeholder="Numeró telefónico de su casa" ng-model="tels.home"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Dirección:
+							<input type="text" placeholder="Calle y número" ng-model="address"/>
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Ciudad:
+							<input type="text" placeholder="Ciudad de residencia" ng-model="city"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Estado:
+							<input type="text" placeholder="Estado en el que reside" ng-model="state"/>
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Código Postal:
+							<input type="text" placeholder="Código Postal de residencia" ng-model="zip"/>
+						</label>
+					</div>
+				</div>
+				<div class="large-12 columns">
+					<input type="submit" value="Agregar" class="button">
+				</div>
+			</form>
+		</div>
+		<div ng-show="vista_seleccionada=='editar'">
+			<form ng-submit="editContact()">
+				<h4>Editar Contacto</h4>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Nombre
+							<input type="text" placeholder="Nombre del contacto." ng-model="name" />
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>email:
+							<input type="text" placeholder="email del contacto" ng-model="email"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Compañía:
+							<input type="text" placeholder="Compañía en la que trabaja" ng-model="work" />
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Tel Empresa:
+							<input type="text" placeholder="Teléfono de la empresa" ng-model="tels.work"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Tel Celular:
+							<input type="text" placeholder="Número telefónico celular" ng-model="tels.cel"/>
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Tel Casa:
+							<input type="text" placeholder="Numeró telefónico de su casa" ng-model="tels.home"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Dirección:
+							<input type="text" placeholder="Calle y número" ng-model="address"/>
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Ciudad:
+							<input type="text" placeholder="Ciudad de residencia" ng-model="city"/>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="large-6 columns">
+						<label>Estado:
+							<input type="text" placeholder="Estado en el que reside" ng-model="state"/>
+						</label>
+					</div>
+					<div class="large-6 columns">
+						<label>Código Postal:
+							<input type="text" placeholder="Código Postal de residencia" ng-model="zip"/>
+						</label>
+					</div>
+				</div>
+				<div class="large-12 columns">
+					<input type="submit" value="Guardar" class="button">
+				</div>
+			</form>
+		</div>
 	</div>
-	<div class="small-12 large-2 columns">
-		<a href="#" class="button large">+</a>
+	<div class="small-12 large-2 columns" ng-show="vista_seleccionada=='lista'" ng-click="setVista('nuevo')">
+		<a class="button large">+</a>
 	</div>
+	<div class="small-12 large-2 columns" ng-show="vista_seleccionada=='nuevo'" ng-click="setVista('lista')">
+		<a class="button large">-</a>
+	</div>
+	<div class="small-12 large-2 columns" ng-show="vista_seleccionada=='editar'" ng-click="setVista('lista')">
+		<a class="button large">-</a>
+	</div>
+
 </div>
