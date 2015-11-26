@@ -39,30 +39,42 @@ angular.module('ContactosApp.contacts', ['ngRoute', 'ContactServices'])
 		$scope.zip = "";
 	}
 
+	var getCamposContact = function(contact){
+		contact.name = $scope.name;
+		contact.email = $scope.email;
+		contact.work = $scope.work;
+		contact.tels.work = $scope.tels.work;
+		contact.tels.cel = $scope.tels.cel;
+		contact.tels.home = $scope.tels.home;
+		contact.address = $scope.address;
+		contact.city = $scope.city;
+		contact.state = $scope.state;
+		contact.zip = $scope.zip;	
+	}
+
 	$scope.setScope = function(){
 		$scope.contacts = Contact.setScope();
 	}
 
 	$scope.addContact = function(){
-		var contact = {
-		"name": $scope.name,
-		"email": $scope.email,
-		"work": $scope.work,
-		"tels": {
-			"work": $scope.tels.work,
-			"cel": $scope.tels.cel,
-			"home": $scope.tels.home,
-		},
-		"address": $scope.address,
-		"city": $scope.city,
-		"state": $scope.state,
-		"zip": $scope.zip
-		}
+		var contact = {};
+		contact.tels = {};
+		getCamposContact(contact);
 		Contact.add(contact).then(function (){
 			$scope.vista_seleccionada = "lista";
 			limpiarContact();
 		});
+	}
 
+	$scope.updateContact = function(){
+		var contact = {};
+		contact.tels = {};
+		getCamposContact(contact);
+		contact.id = $scope.id;
+		Contact.edit(contact).then(function (){
+			$scope.vista_seleccionada = "lista";
+			limpiarContact();
+		});
 	}
 
 	$scope.setEditContact = function(contact){
@@ -77,7 +89,7 @@ angular.module('ContactosApp.contacts', ['ngRoute', 'ContactServices'])
 		$scope.city 		= contact.city;
 		$scope.state 		= contact.state;
 		$scope.zip 			= contact.zip;
-		
+
 		$scope.setVista('editar');
 	}
 

@@ -10,10 +10,26 @@ angular.module('ContactServices', ['firebase'])
 			return _firebasearr;
 		},
 		add: function(contact){
-			var promise = _firebasearr.$add(contact).then(function (ref){
-				var id = ref.key();
-				console.log("GGGGGG: " + id);
-			});
+			var promise = _firebasearr.$add(contact).then(function (ref){});
+			return promise;
+		},
+		edit: function(contact){
+			var record = {};
+			record.tels = {};
+			record = _firebasearr.$getRecord(contact.id);
+
+			record.name =		contact.name;
+			record.email =		contact.email;
+			record.work =		contact.work;
+			record.tels.work =	contact.tels.work;
+			record.tels.cel =	contact.tels.cel;
+			record.tels.home =	contact.tels.home;
+			record.address =	contact.address;
+			record.city =		contact.city;
+			record.state =		contact.state;
+			record.zip =		contact.zip;
+
+			var promise = _firebasearr.$save(record).then(function (ref){});
 			return promise;
 		}
 	}
