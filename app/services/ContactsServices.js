@@ -31,6 +31,10 @@ angular.module('ContactServices', ['firebase'])
 
 			var promise = _firebasearr.$save(record).then(function (ref){});
 			return promise;
+		},
+		remove: function(contact){
+			var promise = _firebasearr.$remove(contact).then(function (ref){});
+			return promise;
 		}
 	}
 	return funciones;

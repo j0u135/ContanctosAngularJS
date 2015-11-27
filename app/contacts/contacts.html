@@ -11,12 +11,12 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="contact in contacts">
-						<td><a href="">{{contact.name}}</a></td>
+						<td><a ng-click="showContact(contact)">{{contact.name}}</a></td>
 						<td>{{contact.work}}</td>
 						<td>{{contact.email}}</td>
 						<td>
 							<a ng-click="setEditContact(contact)" class="button tiny">Editar</a>
-							<a href="" class="button tiny alert">Borrar</a>
+							<a ng-click="removeContact(contact)" class="button tiny alert">Borrar</a>
 						</td>
 					</tr>
 				</tbody>
@@ -158,6 +158,25 @@
 				</div>
 			</form>
 		</div>
+		<div ng-show="vista_seleccionada=='show'">
+			<div class="primary card">
+				<div class="card-divider">
+					{{contact_selected.name}}
+				</div>
+				<div class="card-section">
+					<p><strong>email: </strong>{{contact_selected.email}}</p>
+					<p><strong>Empresa: </strong>{{contact_selected.work}}</p>
+					<p><strong>Tel. Empresa: </strong>{{contact_selected.tels.work}}</p>
+					<p><strong>Tel. Celular: </strong>{{contact_selected.tels.cel}}</p>
+					<p><strong>Tel. Casa: </strong>{{contact_selected.tels.home}}</p>
+					<p><strong>Dirección: </strong>{{contact_selected.address}}</p>
+					<p><strong>Ciudad: </strong>{{contact_selected.city}}</p>
+					<p><strong>Estado: </strong>{{contact_selected.state}}</p>
+					<p><strong>Código Postal: </strong>{{contact_selected.zip}}</p>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<div class="small-12 large-2 columns" ng-show="vista_seleccionada=='lista'" ng-click="setVista('nuevo')">
 		<a class="button large">+</a>
@@ -166,6 +185,9 @@
 		<a class="button large">-</a>
 	</div>
 	<div class="small-12 large-2 columns" ng-show="vista_seleccionada=='editar'" ng-click="setVista('lista')">
+		<a class="button large">-</a>
+	</div>
+	<div class="small-12 large-2 columns" ng-show="vista_seleccionada=='show'" ng-click="setVista('lista')">
 		<a class="button large">-</a>
 	</div>
 

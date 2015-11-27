@@ -77,6 +77,10 @@ angular.module('ContactosApp.contacts', ['ngRoute', 'ContactServices'])
 		});
 	}
 
+	$scope.removeContact = function(contact){
+		Contact.remove(contact).then(function (){});
+	}
+
 	$scope.setEditContact = function(contact){
 		$scope.id 			= contact.$id;
 		$scope.name 		= contact.name;
@@ -91,6 +95,11 @@ angular.module('ContactosApp.contacts', ['ngRoute', 'ContactServices'])
 		$scope.zip 			= contact.zip;
 
 		$scope.setVista('editar');
+	}
+
+	$scope.showContact = function(contact){
+		$scope.contact_selected = contact;		
+		$scope.vista_seleccionada = "show";
 	}
 
 	$scope.mostrarVista = function(){
